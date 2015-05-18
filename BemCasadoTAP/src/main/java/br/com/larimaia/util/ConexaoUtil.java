@@ -12,13 +12,18 @@ public class ConexaoUtil {
         String url = "jdbc:postgresql://localhost:5432/LariMaia";
         String usuario = "postgres";
         String senha = "root";
+        	
         try {
-            Connection connection = DriverManager.getConnection(url,usuario, senha);
-            System.out.println("Conectado com Sucesso !!");
-            return  connection;
-        } catch (SQLException ex) {
-            Logger.getLogger(ConexaoUtil.class.getName()).log(Level.SEVERE, null, ex);
-        }
+				Class.forName("org.postgresql.Driver");
+				System.out.println("url = "+url+"\nusuario = "+usuario+"\nsenha = "+senha);
+				Connection connection = DriverManager.getConnection(url,usuario, senha);
+				System.out.println("Conectado com Sucesso !!");
+				return  connection;
+			} catch (ClassNotFoundException  | SQLException ex) {
+				// TODO Auto-generated catch block
+				Logger.getLogger(ConexaoUtil.class.getName()).log(Level.SEVERE, null, ex);
+			}
+        
         
         return null;
 

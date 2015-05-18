@@ -19,12 +19,14 @@ public class ClienteDAO {
     
     public ClienteDAO(){
         conexao= ConexaoUtil.getConnection();
+        System.out.println("conexao = "+conexao);
     }
     
     public List<Cliente> buscarCliente(){
         String sql= "SELECT * FROM cliente ORDER by nome ";
         
         try {
+        	
             PreparedStatement preparadorSql= conexao.prepareStatement(sql);
             ResultSet resultado = preparadorSql.executeQuery();
             List<Cliente> clientes = new ArrayList<Cliente>();

@@ -1,6 +1,7 @@
 package br.com.larimaia.service;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -88,7 +89,7 @@ public class PedidoService {
     
     public static List<Cliente> buscarClientes(){
         ClienteDAO cliDAO = new ClienteDAO();
-        return  cliDAO.buscarCliente();
+        return cliDAO.buscarCliente();
     }
     
     public static List<Produto> buscarProdutos(){
