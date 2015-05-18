@@ -1,6 +1,11 @@
 
 	
+<%@page import="br.com.larimaia.model.Cliente"%>
+<%@page import="br.com.larimaia.model.TipoEvento"%>
+<%@page import="br.com.larimaia.model.Produto"%>
+<%@page import="br.com.larimaia.service.PedidoService"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" import="java.util.*,java.lang.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +17,7 @@
 <form action="PedidoController" method="POST">
 
 <h1 align="left">Lari Maia - Pedido</h1>
-
+<%String acao=""; %>
 
 
 <div style="position: absolute; top:100px;left:5px; width: 500px; height:500px; background-color: white;">
@@ -28,11 +33,11 @@
 	
 	<label>Cliente: </label>
 		<select Name = "choiceCLiente" style ="width:200px;">
-			<c:forEach var="cliente" items="${listaCliente}">
-				<option selected value="${cliente.nome}">
-					<c:out value="${cliente.nome}"/> 
-				</option>
-			</c:forEach>
+				<option value="0">Escolha um Cliente</option>
+				<% List<Cliente> clien= PedidoService.buscarClientes();
+					for (Cliente c: clien) {%>
+				<option value = "<%=c.getId()%>"><%=c.getNome()%></option>
+  				<% }%>
 			
 		</select>
 	<br>
@@ -64,6 +69,12 @@
 	
 	<label>Tipo do Evento: </label>
 	<select style ="width:200px;">
+			<option value="0">Escolha um evento</option>
+			<% List<TipoEvento> tipoEvento= PedidoService.buscarTipoEventos();
+				for (TipoEvento te: tipoEvento) {%>
+			<option value = "<%=te.getId()%>"><%=te.getDescricao()%></option>
+ 				<% }%>
+	
 	</select>
 	<br>
 	
@@ -82,12 +93,14 @@
 	<label> Produto  </label>
 	<label>Quantidade </label>
 	<label>Valor</label>
-	<button>Adicionar</button>
+	<button type="button" value="adicionar"name="add">Adicionar</button>
 	<br>
 	<select>
-		<option> Chocolate </option>
-		<option> Morango </option>
-		<option> Creme </option>
+		<option value="0">Escolha um produto</option>
+			<% List<Produto> prod= PedidoService.buscarProdutos();
+				for (Produto produt: prod) {%>
+			<option value = "<%=produt.getId()%>"><%=produt.getDescricao()%></option>
+ 				<% }%>
 		
 	</select>
 	

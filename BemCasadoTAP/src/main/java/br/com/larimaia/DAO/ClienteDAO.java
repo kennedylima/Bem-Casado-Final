@@ -19,7 +19,7 @@ public class ClienteDAO {
     
     public ClienteDAO(){
         conexao= ConexaoUtil.getConnection();
-        System.out.println("conexao = "+conexao);
+        
     }
     
     public List<Cliente> buscarCliente(){

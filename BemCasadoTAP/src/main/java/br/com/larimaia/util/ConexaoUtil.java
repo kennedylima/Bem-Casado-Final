@@ -15,7 +15,6 @@ public class ConexaoUtil {
         	
         try {
 				Class.forName("org.postgresql.Driver");
-				System.out.println("url = "+url+"\nusuario = "+usuario+"\nsenha = "+senha);
 				Connection connection = DriverManager.getConnection(url,usuario, senha);
 				System.out.println("Conectado com Sucesso !!");
 				return  connection;
