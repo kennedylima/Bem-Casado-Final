@@ -46,7 +46,7 @@ public class ProdutoDAO {
         return null;
     }
     
-    public Produto buscaProdutoPorID(int id){
+    public Produto buscarProdutoPorID(int id){
         String sql = "SELECT * FROM Produto WHERE idproduto=?";
         
         try {
@@ -133,6 +133,6 @@ public class ProdutoDAO {
         }
         
     }
-    
+
     
 }

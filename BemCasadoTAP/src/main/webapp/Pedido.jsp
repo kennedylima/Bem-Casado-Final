@@ -17,12 +17,9 @@
 <form action="PedidoController" method="POST">
 
 <h1 align="left">Lari Maia - Pedido</h1>
-<%String acao=""; %>
-
 
 <div style="position: absolute; top:100px;left:5px; width: 500px; height:500px; background-color: white;">
 
-	<%System.err.println("Passou aqui JSP");%>
 	<label >Origem do Pedido: </label>
 	<input  type="text"/>
 	<br>
@@ -93,9 +90,9 @@
 	<label> Produto  </label>
 	<label>Quantidade </label>
 	<label>Valor</label>
-	<button type="button" value="adicionar"name="add">Adicionar</button>
+	<button name="adicionar" value="adicionar">Adicionar</button>
 	<br>
-	<select>
+	<select name="produto">
 		<option value="0">Escolha um produto</option>
 			<% List<Produto> prod= PedidoService.buscarProdutos();
 				for (Produto produt: prod) {%>
@@ -105,7 +102,7 @@
 	</select>
 	
 	<input type="text">
-	<input type="number">
+	<input type="text">
 	<br>
 	<br>
 	<table>
@@ -119,6 +116,10 @@
 		</thead>	
 		<tbody>
 			<tr> <!-- Jogar os produtos cadastrados aqui dentro -->
+			
+				
+				
+				
 				<th>Chocolate</th>
 				<th>10</th>
 				<td>R$:20.00</td>
@@ -130,6 +131,8 @@
 	<label>Valor Total:</label>
 	<input type="text"/>
 
+	<button name="salvar" value="salvar">Salvar</button>
+
 
 <br>
 <br>
@@ -138,9 +141,8 @@
 <br>
 <br>
 <br>
-	<button>Salvar</button>
 </div>
-	
+
 	
 </form>
 </body>

@@ -2,22 +2,15 @@
 package br.com.larimaia.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
-import br.com.larimaia.exception.ServiceException;
-import br.com.larimaia.model.Cliente;
-import br.com.larimaia.model.Pedido;
-import br.com.larimaia.model.TipoEvento;
-import br.com.larimaia.service.PedidoService;
+import br.com.larimaia.model.Produto;
+import br.com.larimaia.service.ProdutoService;
 
 
 @WebServlet("/PedidoController")
@@ -29,7 +22,7 @@ public class PedidoController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		
+		System.out.println("botao = "+req.getParameter("salvar"));
 		
 //		System.err.println("Passou aqui Controller");
 //		List<Cliente> clientes = new ArrayList<>();
@@ -44,7 +37,19 @@ public class PedidoController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("botao = "+req.getParameter("adicionar"));
+		if(req.getParameter("salvar")!=null){
+			System.out.println("Salvo com sucesso!");
+		}
+		
+		if(req.getParameter("adicionar")!=null){
+			String idprod= req.getParameter("produto");
+//			int produtoid = Integer.parseInt(idprod);
+//			String qtd = req.getParameter("")
+			
+////			pedido.set
+//			Produto prodEscolhido = ProdutoService.buscarProdutoPorId(produtoid);
+//			
+		}
 //		Integer id;
 //	    String origemPedido = req.getParameter("origemPedido");
 //	    String dataPedido = req.getParameter("dataPedido");
