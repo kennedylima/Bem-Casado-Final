@@ -6,6 +6,7 @@
 <%@page import="br.com.larimaia.service.PedidoService"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" import="java.util.*,java.lang.*" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,7 +91,6 @@
 	<br>
 	<label> Produto  </label>
 	<label>Quantidade </label>
-	<label>Valor</label>
 	<button type="submit" name="adicionar" value="adicionar">Adicionar </button>
 	<br>
 	
@@ -99,12 +99,13 @@
 			<% List<Produto> prod= PedidoService.buscarProdutos();
 				for (Produto produt: prod) {%>
 			<option value = "<%=produt%>"><%=produt.getDescricao()%></option>
- 				<%}	%>
+ 				<% 
+ 					}	
+ 				%>
 		
 	</select>
 	
-	<input name= "quantidade"id="qtd" type="text">
-	<input name="valor" id="valor"type="text">
+	<input name= "quantidade"id="qtd" type="number">
 	<br>
 	<br>
 	
@@ -120,9 +121,8 @@
 			<c:forEach items="${itens}" var="itens">
                 <tr>
                     <td><c:out value="${itens.produto.getDescricao()}" /></td>
-                    <td><c:out value="${itens.quantidade }l}" /></td>
-                    <td><c:out value="${itens.valor }l}" /></td>
-                    <td><a href="UserController?action=edit&userId=<c:out value="${user.uname}"/>">Update</a></td>
+                    <td><c:out value="${itens.quantidade }" /></td>
+                    <td><c:out value="${itens.valor }" /></td>
                     <td><a href="UserController?action=delete&userId=<c:out value="${user.uname}"/>">Delete</a></td>
                 </tr>
             </c:forEach>
@@ -133,7 +133,7 @@
 	<label>Valor Total:</label>
 	<input type="text"/>
 
-	<button name="salvar" value="salvar">Salvar</button>
+	<button type="submit" name="salvar" value="salvar">Salvar</button>
 
 
 <br>

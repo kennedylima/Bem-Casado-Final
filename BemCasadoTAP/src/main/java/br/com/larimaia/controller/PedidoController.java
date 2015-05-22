@@ -15,12 +15,14 @@ import javax.swing.JOptionPane;
 import br.com.larimaia.model.ItemPedido;
 import br.com.larimaia.model.Pedido;
 import br.com.larimaia.model.Produto;
+import br.com.larimaia.service.PedidoService;
 import br.com.larimaia.service.ProdutoService;
 
 
 @WebServlet("/PedidoController")
 public class PedidoController extends HttpServlet{
-	private static List<ItemPedido> itemPedido;
+	 
+	private static List<ItemPedido> itemPedido = new ArrayList<ItemPedido>();;
 	private static final long serialVersionUID = 1L;
 	
 
@@ -45,16 +47,25 @@ public class PedidoController extends HttpServlet{
 			System.out.println(req.getParameter("produto"));
 			ItemPedido ip = new ItemPedido();
 			
-			Produto pro = new Produto();
-			pro.setDescricao("Kennedy");
-			pro.setValor(20.0);
-			
-
-			ip.setProduto(pro);
-			System.out.println("Produto: "+ip.getProduto().getDescricao());
-			
 			ip.setQuantidade(Integer.parseInt(req.getParameter("quantidade")));
 			System.out.println("QTD: "+ ip.getQuantidade());
+			
+		
+			//System.out.println("Produto: "+ip.getProduto().getDescricao());
+			
+			
+			PedidoService ps = new PedidoService();
+			List<Produto> prod = ps.buscarProdutos();
+			String desc = req.getParameter("produto");
+			for(Produto p : prod){
+				if(p.getDescricao().equals(desc)){
+					ip.setProduto(p);
+				}
+				else{
+					System.out.println("Não:" + p.getDescricao() +" - "+ desc);
+				}
+				
+			}
 			
 			ip.setValor(ip.getProduto().getValor()*ip.getQuantidade());
 			System.out.println("Valor: "+ ip.getValor());
@@ -62,7 +73,7 @@ public class PedidoController extends HttpServlet{
 			
 			
 			System.out.println(ip.getPedido() +" - "+ ip.getProduto().getDescricao() +" - "+ ip.getQuantidade() +" - "+ ip.getValor());
-			itemPedido= new ArrayList<ItemPedido>();
+			
 			
 			itemPedido.add(ip);
 			
@@ -71,6 +82,9 @@ public class PedidoController extends HttpServlet{
 			
 			// ip.getProduto().getValor()
 ////			pedido.set
+			//Produto pro = new Produto();
+			//pro.setDescricao("Kennedy");
+			//pro.setValor(20.0);
 //			Produto prodEscolhido = ProdutoService.buscarProdutoPorId(produtoid);
 //			
 		}
