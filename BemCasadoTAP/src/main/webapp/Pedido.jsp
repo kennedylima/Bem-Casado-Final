@@ -1,5 +1,5 @@
 
-	
+
 <%@page import="br.com.larimaia.model.Cliente"%>
 <%@page import="br.com.larimaia.model.TipoEvento"%>
 <%@page import="br.com.larimaia.model.Produto"%>
@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="MeuCSS.css">
 <meta charset="ISO-8859-1">
 <title>Cadastro de Pedido</title>
+
 </head>
 <body>
 <form action="PedidoController" method="POST">
@@ -90,40 +91,41 @@
 	<label> Produto  </label>
 	<label>Quantidade </label>
 	<label>Valor</label>
-	<button name="adicionar" value="adicionar">Adicionar</button>
+	<button type="submit" name="adicionar" value="adicionar">Adicionar </button>
 	<br>
-	<select name="produto">
+	
+	<select id="produto"name="produto" onchange="adicionar">
 		<option value="0">Escolha um produto</option>
 			<% List<Produto> prod= PedidoService.buscarProdutos();
 				for (Produto produt: prod) {%>
-			<option value = "<%=produt.getId()%>"><%=produt.getDescricao()%></option>
- 				<% }%>
+			<option value = "<%=produt%>"><%=produt.getDescricao()%></option>
+ 				<%}	%>
 		
 	</select>
 	
-	<input type="text">
-	<input type="text">
+	<input name= "quantidade"id="qtd" type="text">
+	<input name="valor" id="valor"type="text">
 	<br>
 	<br>
-	<table>
+	
+	<table id="tabela">
 		<thead>
 			<tr>
 			    <th>Produto</th>
 			    <th>Quantidade</th>
 			    <th>Valor</th>
-			    <th>Excluir</th>
 			</tr>
 		</thead>	
 		<tbody>
-			<tr> <!-- Jogar os produtos cadastrados aqui dentro -->
-			
-				
-				
-				
-				<th>Chocolate</th>
-				<th>10</th>
-				<td>R$:20.00</td>
-				<td><input type="checkbox"></td>
+			<c:forEach items="${itens}" var="itens">
+                <tr>
+                    <td><c:out value="${itens.produto.getDescricao()}" /></td>
+                    <td><c:out value="${itens.quantidade }l}" /></td>
+                    <td><c:out value="${itens.valor }l}" /></td>
+                    <td><a href="UserController?action=edit&userId=<c:out value="${user.uname}"/>">Update</a></td>
+                    <td><a href="UserController?action=delete&userId=<c:out value="${user.uname}"/>">Delete</a></td>
+                </tr>
+            </c:forEach>
 		</tbody>
 	</table>
 	<br>

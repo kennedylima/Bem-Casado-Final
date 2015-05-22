@@ -2,20 +2,25 @@
 package br.com.larimaia.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
+import br.com.larimaia.model.ItemPedido;
+import br.com.larimaia.model.Pedido;
 import br.com.larimaia.model.Produto;
 import br.com.larimaia.service.ProdutoService;
 
 
 @WebServlet("/PedidoController")
 public class PedidoController extends HttpServlet{
-
+	private static List<ItemPedido> itemPedido;
 	private static final long serialVersionUID = 1L;
 	
 
@@ -23,29 +28,48 @@ public class PedidoController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		System.out.println("botao = "+req.getParameter("salvar"));
-		
-//		System.err.println("Passou aqui Controller");
-//		List<Cliente> clientes = new ArrayList<>();
-//		ClienteService cs = new ClienteService();
-//		clientes = cs.listar();
-//		req.setAttribute("listaCliente",clientes);
-//		RequestDispatcher dispatcher = req.getRequestDispatcher("Pedido.jsp");  
-//		dispatcher.forward(req,resp); 
+		 
 		
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		
 		if(req.getParameter("salvar")!=null){
 			System.out.println("Salvo com sucesso!");
 		}
 		
 		if(req.getParameter("adicionar")!=null){
-			String idprod= req.getParameter("produto");
-//			int produtoid = Integer.parseInt(idprod);
-//			String qtd = req.getParameter("")
+			System.out.println("Get Adicionar");
+			System.out.println(req.getParameter("produto"));
+			ItemPedido ip = new ItemPedido();
 			
+			Produto pro = new Produto();
+			pro.setDescricao("Kennedy");
+			pro.setValor(20.0);
+			
+
+			ip.setProduto(pro);
+			System.out.println("Produto: "+ip.getProduto().getDescricao());
+			
+			ip.setQuantidade(Integer.parseInt(req.getParameter("quantidade")));
+			System.out.println("QTD: "+ ip.getQuantidade());
+			
+			ip.setValor(ip.getProduto().getValor()*ip.getQuantidade());
+			System.out.println("Valor: "+ ip.getValor());
+			
+			
+			
+			System.out.println(ip.getPedido() +" - "+ ip.getProduto().getDescricao() +" - "+ ip.getQuantidade() +" - "+ ip.getValor());
+			itemPedido= new ArrayList<ItemPedido>();
+			
+			itemPedido.add(ip);
+			
+			req.setAttribute("itens", itemPedido);
+			req.getRequestDispatcher("Pedido.jsp").forward(req, resp);
+			
+			// ip.getProduto().getValor()
 ////			pedido.set
 //			Produto prodEscolhido = ProdutoService.buscarProdutoPorId(produtoid);
 //			
