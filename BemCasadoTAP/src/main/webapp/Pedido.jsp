@@ -23,11 +23,11 @@
 <div style="position: absolute; top:100px;left:5px; width: 500px; height:500px; background-color: white;">
 
 	<label >Origem do Pedido: </label>
-	<input  type="text"/>
+	<input name="origemProduto"  type="text"/>
 	<br>
 	
 	<label>Data do Pedido: </label>
-	<input type="date"/>
+	<input name="dataPedido"  type="date"/>
 	<br>
 	
 	<label>Cliente: </label>

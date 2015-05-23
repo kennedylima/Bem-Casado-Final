@@ -39,7 +39,22 @@ public class PedidoController extends HttpServlet{
 		
 		
 		if(req.getParameter("salvar")!=null){
-			System.out.println("Salvo com sucesso!");
+			Pedido ped = new Pedido();
+		    ped.setOrigemPedido(req.getParameter("origemProduto"));
+		    ped.setDataPedido(req.getParameter("dataPedido"));
+		    
+		    
+//		    ped.setCliente(req.getParameter("cliente"));
+//		    ped.setCerimonial(cerimonial);
+//		    ped.setDataEvento(dataEvento);
+//		    ped.setTipoEvento(tipoEvento);
+//		    ped.setHoraEvento(horaEvento);
+//		    ped.setIndicacao(indicacao);
+//		    ped.setLocalEvento(localEvento);
+//		    ped.setEnderecoEvento(enderecoEvento);
+//		    ped.setObs(obs);
+			
+			
 		}
 		
 		if(req.getParameter("adicionar")!=null){
@@ -102,18 +117,7 @@ public class PedidoController extends HttpServlet{
 //	    String enderecoEvento = req.getParameter("enderecoEvento");
 //	    String obs = req.getParameter("obs");
 //	    
-//	    Pedido ped = new Pedido();
-//	    ped.setOrigemPedido(origemPedido);
-//	    ped.setDataPedido(dataPedido);
-//	    ped.setCliente(cliente);
-//	    ped.setCerimonial(cerimonial);
-//	    ped.setDataEvento(dataEvento);
-//	    ped.setTipoEvento(tipoEvento);
-//	    ped.setHoraEvento(horaEvento);
-//	    ped.setIndicacao(indicacao);
-//	    ped.setLocalEvento(localEvento);
-//	    ped.setEnderecoEvento(enderecoEvento);
-//	    ped.setObs(obs);
+//	    
 //	    
 //		PedidoService ps = new PedidoService();
 //		try {
