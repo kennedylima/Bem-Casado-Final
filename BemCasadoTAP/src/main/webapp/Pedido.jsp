@@ -112,19 +112,25 @@
 	<table id="tabela">
 		<thead>
 			<tr>
+				<th> Id</th>
 			    <th>Produto</th>
 			    <th>Quantidade</th>
 			    <th>Valor</th>
 			</tr>
 		</thead>	
 		<tbody>
-			<c:forEach items="${itens}" var="itens">
+			
+			
+			<c:forEach items="${requestScope.itens}" var="itens" varStatus="contador">
+                <div id="${contador}">
                 <tr>
-                    <td><c:out value="${itens.produto.getDescricao()}" /></td>
+                	<td><c:out value="${contador.index}" /></td>
+                	<td><c:out value="${itens.produto.getDescricao()}" /></td>
                     <td><c:out value="${itens.quantidade }" /></td>
                     <td><c:out value="${itens.valor }" /></td>
-                    <td><a href="UserController?action=delete&userId=<c:out value="${user.uname}"/>">Delete</a></td>
+                    <td><a href="PedidoController?acao=excluir&id=${contador.index}">Excluir</a></td>
                 </tr>
+				</div>
             </c:forEach>
 		</tbody>
 	</table>
