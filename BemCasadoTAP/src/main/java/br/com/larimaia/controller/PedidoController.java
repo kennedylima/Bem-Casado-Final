@@ -56,13 +56,14 @@ public class PedidoController extends HttpServlet{
 			
 			PedidoService ps = new PedidoService();
 			List<Produto> prod = ps.buscarProdutos();
-			String desc = req.getParameter("produto");
+			int id = Integer.parseInt(req.getParameter("produto"));
+			System.out.println("ID"+id);
 			for(Produto p : prod){
-				if(p.getDescricao().equals(desc)){
+				if(p.getId().equals(id)){
 					ip.setProduto(p);
 				}
 				else{
-					System.out.println("Não:" + p.getDescricao() +" - "+ desc);
+					System.out.println("Não:" + p.getDescricao() +" - "+ id);
 				}
 				
 			}

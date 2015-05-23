@@ -98,7 +98,7 @@
 		<option value="0">Escolha um produto</option>
 			<% List<Produto> prod= PedidoService.buscarProdutos();
 				for (Produto produt: prod) {%>
-			<option value = "<%=produt%>"><%=produt.getDescricao()%></option>
+			<option value = "<%=produt.getId()%>"><%=produt.getDescricao()%></option>
  				<% 
  					}	
  				%>
