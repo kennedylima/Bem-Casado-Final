@@ -29,7 +29,17 @@ public class PedidoController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("botao = "+req.getParameter("salvar"));
+		//System.out.println("botao = "+req.getParameter("salvar"));
+		String acao =req.getParameter("acao");
+		
+		
+		if(acao.equals("excluir")){
+			int id = Integer.parseInt(req.getParameter("id"));
+			System.out.println("ID lista:"+id);
+			itemPedido.remove(id);
+			req.setAttribute("itens", itemPedido);
+			req.getRequestDispatcher("Pedido.jsp").forward(req, resp);
+		}
 		 
 		
 	}
@@ -42,17 +52,13 @@ public class PedidoController extends HttpServlet{
 			System.out.println("Salvo com sucesso!");
 		}
 		
-		if(req.getParameter("adicionar")!=null){
+		else if(req.getParameter("adicionar")!=null){
 			System.out.println("Get Adicionar");
 			System.out.println(req.getParameter("produto"));
 			ItemPedido ip = new ItemPedido();
 			
 			ip.setQuantidade(Integer.parseInt(req.getParameter("quantidade")));
 			System.out.println("QTD: "+ ip.getQuantidade());
-			
-		
-			//System.out.println("Produto: "+ip.getProduto().getDescricao());
-			
 			
 			PedidoService ps = new PedidoService();
 			List<Produto> prod = ps.buscarProdutos();
@@ -72,23 +78,19 @@ public class PedidoController extends HttpServlet{
 			System.out.println("Valor: "+ ip.getValor());
 			
 			
-			
 			System.out.println(ip.getPedido() +" - "+ ip.getProduto().getDescricao() +" - "+ ip.getQuantidade() +" - "+ ip.getValor());
 			
 			
 			itemPedido.add(ip);
 			
+			
 			req.setAttribute("itens", itemPedido);
 			req.getRequestDispatcher("Pedido.jsp").forward(req, resp);
 			
-			// ip.getProduto().getValor()
-////			pedido.set
-			//Produto pro = new Produto();
-			//pro.setDescricao("Kennedy");
-			//pro.setValor(20.0);
-//			Produto prodEscolhido = ProdutoService.buscarProdutoPorId(produtoid);
-//			
+			
 		}
+		
+		
 //		Integer id;
 //	    String origemPedido = req.getParameter("origemPedido");
 //	    String dataPedido = req.getParameter("dataPedido");
