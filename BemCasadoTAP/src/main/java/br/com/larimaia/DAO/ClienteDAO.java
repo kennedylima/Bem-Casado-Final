@@ -51,6 +51,37 @@ public class ClienteDAO {
         
         return null;
     }
+
+	public Cliente buscarClientePorId(Integer id) {
+		String sql= "SELECT * FROM cliente WHERE idcliente=?";
+        
+        try {
+        	
+            PreparedStatement preparadorSql= conexao.prepareStatement(sql);
+            preparadorSql.setInt(1, id);
+            
+            ResultSet resultado = preparadorSql.executeQuery();
+            
+            Cliente cliente = new Cliente();
+            
+            while (resultado.next()){
+                
+                
+                cliente.setId(resultado.getInt("idcliente"));
+                cliente.setNome(resultado.getString("nome"));
+                cliente.setEmail(resultado.getString("email"));
+                cliente.setTelefone(resultado.getString("telefone"));
+            }
+            
+            preparadorSql.close();
+            return cliente;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+		return null;
+	}
     
           
 }

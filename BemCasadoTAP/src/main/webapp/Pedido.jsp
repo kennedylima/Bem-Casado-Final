@@ -31,7 +31,7 @@
 	<br>
 	
 	<label>Cliente: </label>
-		<select Name = "choiceCLiente" style ="width:200px;">
+		<select name="clie" style ="width:200px;">
 				<option value="0">Escolha um Cliente</option>
 				<% List<Cliente> clien= PedidoService.buscarClientes();
 					for (Cliente c: clien) {%>
@@ -43,11 +43,11 @@
 	
 	
 	<label>Indica&ccedil;&atilde;o: </label>
-	<input type="text"/>
+	<input name ="indicacao" type="text"/>
 	<br>
 	
 	<label>Observa&ccedil;&otilde;es: </label>
-	<textarea style="width: 400px; height: 100px;"></textarea>
+	<textarea name="obs" style="width: 400px; height: 100px;"></textarea>
 	<br>
 <br>
 <br>
@@ -59,7 +59,7 @@
 <div style="position: absolute; top:100px;left:550px; width: 500px; background-color: white;">
 
 	<label>Cerimonial: </label>
-	<input type="text"/>
+	<input name ="cerimonial" type="text"/>
 	<br>
 	
 	<label>Data do Evento: </label>
@@ -67,7 +67,7 @@
 	<br>
 	
 	<label>Tipo do Evento: </label>
-	<select style ="width:200px;">
+	<select name="tipoEvento" style ="width:200px;">
 			<option value="0">Escolha um evento</option>
 			<% List<TipoEvento> tipoEvento= PedidoService.buscarTipoEventos();
 				for (TipoEvento te: tipoEvento) {%>
@@ -78,15 +78,15 @@
 	<br>
 	
 	<label>Horario do Evento: </label>
-	<input type="text"/>
+	<input name="horaEvento" type="text"/>
 	<br>
 	
 	<label>Local do Evento: </label>
-	<input type="text"/>
+	<input name="localEvento" type="text"/>
 	<br>
 	
 	<label>Endere&ccedil;o: </label>
-	<input type="text"/>
+	<input name="enderecoEvento" type="text"/>
 	<br>
 	<br>
 	<label> Produto  </label>

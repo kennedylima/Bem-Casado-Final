@@ -79,8 +79,9 @@ public class PedidoService {
        pedidoDAO.excluir(id);
     }
 
-    public Pedido buscarPorId(Integer id) {
-        return pedidoDAO.buscarPorId(id);
+    public static Pedido buscarPorId(Integer id) {
+    	PedidoDAO pedDAO = new PedidoDAO(); 
+    	return pedDAO.buscarPorId(id);
     
     }
     public List<Pedido> buscarTodos() {

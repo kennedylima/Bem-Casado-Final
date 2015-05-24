@@ -10,13 +10,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
+import br.com.larimaia.model.Cliente;
 import br.com.larimaia.model.ItemPedido;
 import br.com.larimaia.model.Pedido;
 import br.com.larimaia.model.Produto;
+import br.com.larimaia.model.TipoEvento;
+import br.com.larimaia.service.ClienteService;
 import br.com.larimaia.service.PedidoService;
-import br.com.larimaia.service.ProdutoService;
 
 
 @WebServlet("/PedidoController")
@@ -53,16 +54,31 @@ public class PedidoController extends HttpServlet{
 		    ped.setOrigemPedido(req.getParameter("origemProduto"));
 		    ped.setDataPedido(req.getParameter("dataPedido"));
 		    
+			//Inteiro idCliente recebe do cliente escolhido pelo choicebox convertendo em inteiro
+		    int idCliente =Integer.parseInt(req.getParameter("clie"));
 		    
-//		    ped.setCliente(req.getParameter("cliente"));
-//		    ped.setCerimonial(cerimonial);
-//		    ped.setDataEvento(dataEvento);
-//		    ped.setTipoEvento(tipoEvento);
-//		    ped.setHoraEvento(horaEvento);
-//		    ped.setIndicacao(indicacao);
-//		    ped.setLocalEvento(localEvento);
-//		    ped.setEnderecoEvento(enderecoEvento);
-//		    ped.setObs(obs);
+		    //ClienteService  busca o cliente por id e seta no novo cliente 
+		    Cliente cliente = ClienteService.buscarClientePorId(idCliente);
+		    
+		    //setando o cliente dentro do pedido
+		    ped.setCliente(cliente);
+		    
+		    ped.setCerimonial(req.getParameter("cerimonial"));
+		    ped.setDataEvento(req.getParameter("dataEvento"));
+		    //anterior ok
+			
+		    //inteiro te(tipo evento) recebe o id do tipo evento escolhido no combobox
+		    int te = Integer.parseInt(req.getParameter("tipoEvento"));
+		    
+		    //setando o tipo do evento buscado por id no banco 
+			TipoEvento tipoEvento = TipoEventoService.BuscarTipoEventoPorId(te);
+			
+		    ped.setTipoEvento(tipoEvento);
+		    ped.setHoraEvento(req.getParameter("horaEvento"));
+		    ped.setIndicacao(req.getParameter("indicacao"));
+		    ped.setLocalEvento(req.getParameter("localEvento"));
+		    ped.setEnderecoEvento(req.getParameter("enderecoEvento"));
+		    ped.setObs(req.getParameter("obs"));
 			
 			
 		}
