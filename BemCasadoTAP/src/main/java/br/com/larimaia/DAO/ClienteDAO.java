@@ -22,7 +22,7 @@ public class ClienteDAO {
         
     }
     
-    public List<Cliente> buscarCliente(){
+    public List<Cliente> buscarClientes(){
         String sql= "SELECT * FROM cliente ORDER by nome ";
         
         try {

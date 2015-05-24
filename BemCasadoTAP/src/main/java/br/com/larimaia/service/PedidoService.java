@@ -88,10 +88,10 @@ public class PedidoService {
           return (List<Pedido>) pedidoDAO.buscarTodosPedidos();
     }
     
-    public static List<Cliente> buscarClientes(){
-        ClienteDAO cliDAO = new ClienteDAO();
-        return cliDAO.buscarCliente();
-    }
+//    public static List<Cliente> buscarClientes(){
+//        ClienteDAO cliDAO = new ClienteDAO();
+//        return cliDAO.buscarCliente();
+//    }
     
     public static List<Produto> buscarProdutos(){
         ProdutoDAO pdao = new ProdutoDAO();

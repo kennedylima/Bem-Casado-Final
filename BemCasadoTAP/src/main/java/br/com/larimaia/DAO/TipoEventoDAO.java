@@ -45,7 +45,7 @@ public class TipoEventoDAO {
     }
     
     public TipoEvento buscarTipoDeEventoPorId(int id){
-        String sql ="SELECT * FROM tipoevento WHERE id=?";
+        String sql ="SELECT * FROM tipoevento WHERE idtipoevento="+id;
         try {
             PreparedStatement preparadorsql = conexao.prepareStatement(sql);
             ResultSet resultado = preparadorsql.executeQuery();

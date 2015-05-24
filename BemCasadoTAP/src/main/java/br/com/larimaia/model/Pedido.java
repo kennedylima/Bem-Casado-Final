@@ -1,14 +1,15 @@
 package br.com.larimaia.model;
 
+import java.sql.Date;
 import java.util.List;
 
 public class Pedido {
     private Integer id;
     private String origemPedido;
-    private String dataPedido;
+    private Date dataPedido;
     private Cliente cliente;
     private String cerimonial;
-    private String dataEvento;
+    private Date dataEvento;
     private TipoEvento tipoEvento;
     private String horaEvento;
     private String indicacao;
@@ -33,11 +34,11 @@ public class Pedido {
         this.origemPedido = origemPedido;
     }
 
-    public String getDataPedido() {
+    public Date getDataPedido() {
         return dataPedido;
     }
 
-    public void setDataPedido(String dataPedido) {
+    public void setDataPedido(Date dataPedido) {
         this.dataPedido = dataPedido;
     }
 
@@ -57,11 +58,11 @@ public class Pedido {
         this.cerimonial = cerimonial;
     }
 
-    public String getDataEvento() {
+    public Date getDataEvento() {
         return dataEvento;
     }
 
-    public void setDataEvento(String dataEvento) {
+    public void setDataEvento(Date dataEvento) {
         this.dataEvento = dataEvento;
     }
 

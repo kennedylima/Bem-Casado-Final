@@ -1,5 +1,6 @@
 
 
+<%@page import="br.com.larimaia.service.ClienteService"%>
 <%@page import="br.com.larimaia.model.Cliente"%>
 <%@page import="br.com.larimaia.model.TipoEvento"%>
 <%@page import="br.com.larimaia.model.Produto"%>
@@ -33,7 +34,7 @@
 	<label>Cliente: </label>
 		<select name="clie" style ="width:200px;">
 				<option value="0">Escolha um Cliente</option>
-				<% List<Cliente> clien= PedidoService.buscarClientes();
+				<% List<Cliente> clien= ClienteService.buscarClientes();
 					for (Cliente c: clien) {%>
 				<option value = "<%=c.getId()%>"><%=c.getNome()%></option>
   				<% }%>
@@ -63,7 +64,7 @@
 	<br>
 	
 	<label>Data do Evento: </label>
-	<input type="date"/>
+	<input name="dataEvento" type="date"/>
 	<br>
 	
 	<label>Tipo do Evento: </label>

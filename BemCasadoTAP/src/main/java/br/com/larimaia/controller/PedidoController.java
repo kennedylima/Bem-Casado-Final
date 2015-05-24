@@ -2,6 +2,9 @@
 package br.com.larimaia.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
+import br.com.larimaia.exception.ServiceException;
 import br.com.larimaia.model.Cliente;
 import br.com.larimaia.model.ItemPedido;
 import br.com.larimaia.model.Pedido;
@@ -25,6 +30,7 @@ public class PedidoController extends HttpServlet{
 	 
 	private static List<ItemPedido> itemPedido = new ArrayList<ItemPedido>();;
 	private static final long serialVersionUID = 1L;
+	private PedidoService pedidoService;
 	
 
 	@Override
@@ -52,7 +58,17 @@ public class PedidoController extends HttpServlet{
 		if(req.getParameter("salvar")!=null){
 			Pedido ped = new Pedido();
 		    ped.setOrigemPedido(req.getParameter("origemProduto"));
-		    ped.setDataPedido(req.getParameter("dataPedido"));
+		    
+		    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		    Date dataPedido;
+			try {
+				dataPedido = new Date(format.parse(req.getParameter("dataPedido")).getTime());
+				ped.setDataPedido(dataPedido);
+			} catch (ParseException e1) {
+				System.out.println("data pedido preenchida de forma errada");
+				e1.printStackTrace();
+			}
+          
 		    
 			//Inteiro idCliente recebe do cliente escolhido pelo choicebox convertendo em inteiro
 		    int idCliente =Integer.parseInt(req.getParameter("clie"));
@@ -64,12 +80,20 @@ public class PedidoController extends HttpServlet{
 		    ped.setCliente(cliente);
 		    
 		    ped.setCerimonial(req.getParameter("cerimonial"));
-		    ped.setDataEvento(req.getParameter("dataEvento"));
-		    //anterior ok
+		    
+		    Date dataEvento;
+			try {
+				dataEvento = new Date(format.parse(req.getParameter("dataEvento")).getTime());
+				ped.setDataEvento(dataEvento);
+			} catch (ParseException e1) {
+					System.out.println("Data evento preenchida de forma errada");
+				e1.printStackTrace();
+			}
 			
 		    //inteiro te(tipo evento) recebe o id do tipo evento escolhido no combobox
 		    int te = Integer.parseInt(req.getParameter("tipoEvento"));
 		    
+		    System.out.println("te valor ="+te);
 		    //setando o tipo do evento buscado por id no banco 
 			TipoEvento tipoEvento = TipoEventoService.BuscarTipoEventoPorId(te);
 			
@@ -79,7 +103,20 @@ public class PedidoController extends HttpServlet{
 		    ped.setLocalEvento(req.getParameter("localEvento"));
 		    ped.setEnderecoEvento(req.getParameter("enderecoEvento"));
 		    ped.setObs(req.getParameter("obs"));
-			
+		    
+		    System.out.println("data evento = "+req.getParameter("dataEvento"));
+		    System.out.println("data pedido= "+req.getParameter("dataPedido"));
+		    pedidoService = new PedidoService();
+		    
+		    try {
+				pedidoService.salvar(ped);
+				JOptionPane.showMessageDialog(null, "Cadastradocom Sucesso!");
+				
+			} catch (ServiceException e) {
+				JOptionPane.showMessageDialog(null, e);
+				e.printStackTrace();
+			}
+//			
 			
 		}
 		
