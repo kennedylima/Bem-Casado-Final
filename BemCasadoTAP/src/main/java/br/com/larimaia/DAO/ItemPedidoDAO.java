@@ -39,7 +39,7 @@ public class ItemPedidoDAO {
     }
     
      private void cadastrar(ItemPedido item) {
-        String sql = "INSERT INTO ItemPedido (idproduto,quatidade,valor) VALUES (?,?,?)";
+        String sql = "INSERT INTO ItemPedido (idproduto,quantidade,valor) VALUES (?,?,?)";
         
         try {
             PreparedStatement preparadorSQL = conexao.prepareStatement(sql);
@@ -114,14 +114,14 @@ public class ItemPedidoDAO {
 
 
 	public int buscarItemPedidoCadastrado() {
-		String sql = "SELECT max(iditempedido) as iditempedidocadastrado from itempedido;";
+		String sql = "SELECT max(iditempedido) from itempedido;";
 	     int id =0;
 	        try {
 	            PreparedStatement preparadorSQL = conexao.prepareStatement(sql);
 	            ResultSet resultado = preparadorSQL.executeQuery();
-	            System.out.println("B");
 	            while(resultado.next()){
-	            id = resultado.getInt("idpedido");
+	            	System.out.println("entrei");
+	            	id = resultado.getInt("iditempedido");
 	            }
 	            preparadorSQL.close();
 	            
@@ -129,7 +129,7 @@ public class ItemPedidoDAO {
 	        } catch (SQLException ex) {
 	            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
 	        }   
-	        System.out.println("id = "+id);
+	        System.out.println("id buscado do item Pedido = "+id);
 	        return id;
 	}
 

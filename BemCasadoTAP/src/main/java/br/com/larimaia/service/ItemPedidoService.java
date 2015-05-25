@@ -50,6 +50,7 @@ public class ItemPedidoService {
 
 	public int buscarIDItemPedidoCadastrado() {
 		ItemPedidoDAO itemPedidoDAO = new ItemPedidoDAO();
+		System.out.println("service IP");
 		return itemPedidoDAO.buscarItemPedidoCadastrado();
 	}
     
