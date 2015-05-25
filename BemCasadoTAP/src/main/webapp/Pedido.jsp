@@ -7,6 +7,7 @@
 <%@page import="br.com.larimaia.service.PedidoService"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" import="java.util.*,java.lang.*" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -91,8 +92,7 @@
 	<br>
 	<br>
 	<label> Produto  </label>
-	<label>Quantidade </label>
-	<button type="submit" name="adicionar" value="adicionar">Adicionar </button>
+	
 	<br>
 	
 	<select id="produto"name="produto" onchange="adicionar">
@@ -106,7 +106,10 @@
 		
 	</select>
 	
-	<input name= "quantidade"id="qtd" type="number">
+	<label> Quantidade </label>
+	<input name= "quantidade"id="qtd" type="number" style="width: 30px">
+	<button type="submit" name="adicionar" value="adicionar">Adicionar </button> 
+	
 	<br>
 	<br>
 	
@@ -122,30 +125,34 @@
 		<tbody>
 			
 			
-			<c:forEach items="${requestScope.itens}" var="itens" varStatus="contador">
+			<c:forEach items="${requestScope.itens}" var="itens" varStatus="contador" >
                 <div id="${contador}">
                 <tr>
                 	<td><c:out value="${contador.index}" /></td>
                 	<td><c:out value="${itens.produto.getDescricao()}" /></td>
                     <td><c:out value="${itens.quantidade }" /></td>
-                    <td><c:out value="${itens.valor }" /></td>
-                    <td><a href="PedidoController?acao=excluir&id=${contador.index}">Excluir</a></td>
+                    <td><fmt:formatNumber value="${itens.valor}"/> </td>
+                    <c:set var="valorTotal" value="${valorTotal+ itens.valor}"> </c:set>
+                    <td><a href="PedidoController?acao=excluir&id=${contador.index}">Excluir</a></td>  
                 </tr>
 				</div>
+				
             </c:forEach>
 		</tbody>
 	</table>
 	<br>
 	<br>
-	<label>Valor Total:</label>
-	<input type="text"/>
+	
+	<label>Valor Total =<fmt:formatNumber value="${valorTotal}" type="currency"/> </label>
 
+
+<br>
+<br>
+<br>
 	<button type="submit" name="salvar" value="salvar">Salvar</button>
 
 
-<br>
-<br>
-<br>
+
 <br>
 <br>
 <br>

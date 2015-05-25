@@ -30,7 +30,7 @@ import br.com.larimaia.service.PedidoService;
 
 @WebServlet("/PedidoController")
 public class PedidoController extends HttpServlet{
-	 
+	double  valorTotal =0.0;
 	private static List<ItemPedido> itemPedido = new ArrayList<ItemPedido>();;
 	private static final long serialVersionUID = 1L;
 	private PedidoService pedidoService;
@@ -158,7 +158,7 @@ public class PedidoController extends HttpServlet{
 				
 				
 				
-				JOptionPane.showMessageDialog(null, "Cadastradocom Sucesso!");
+				JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
 				
 			} catch (ServiceException e) {
 				JOptionPane.showMessageDialog(null, e);
@@ -193,6 +193,7 @@ public class PedidoController extends HttpServlet{
 			ip.setValor(ip.getProduto().getValor()*ip.getQuantidade());
 			System.out.println("Valor: "+ ip.getValor());
 			
+			valorTotal= valorTotal+ip.getValor();
 			
 			System.out.println(ip.getPedido() +" - "+ ip.getProduto().getDescricao() +" - "+ ip.getQuantidade() +" - "+ ip.getValor());
 			
