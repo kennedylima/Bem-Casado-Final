@@ -28,43 +28,43 @@ public class PedidoService {
     public void salvar(Pedido pedido) throws ServiceException {
 
         if (pedido.getOrigemPedido().isEmpty()) {
-            throw new ServiceException("Campo Origem do Pedido é obrigatório!");
+            throw new ServiceException("Campo Origem do Pedido Obrigatorio!");
         }
 
         if (pedido.getDataPedido() == null) {
-            throw new ServiceException("Campo Data do Pedido é obrigatório!");
+            throw new ServiceException("Campo Data do Pedido Obrigatorio!");
         }
         
         if (pedido.getCliente().getNome().isEmpty()) {
-            throw new ServiceException("Campo Cliente é obrigatório!");
+            throw new ServiceException("Campo Cliente Obrigatorio!");
         }
 
         if (pedido.getCerimonial().isEmpty()) {
-            throw new ServiceException("Campo Cerimonial é obrigatório!");
+            throw new ServiceException("Campo Cerimonial Obrigatorio!");
         }
         
         if (pedido.getDataEvento() == null) {
-            throw new ServiceException("Campo Data do Evento é obrigatório!");
+            throw new ServiceException("Campo Data do Evento Obrigatorio!");
         }
 
         if (pedido.getTipoEvento().getDescricao().isEmpty()) {
-            throw new ServiceException("Campo Tipo é obrigatório!");
+            throw new ServiceException("Campo Tipo Obrigatorio!");
         }
         
         if (pedido.getHoraEvento().isEmpty()) {
-            throw new ServiceException("Campo Hora é obrigatório!");
+            throw new ServiceException("Campo Hora Obrigatorio!");
         }
         
         if (pedido.getLocalEvento().isEmpty()) {
-            throw new ServiceException("Campo Local do Evento é obrigatório!");
+            throw new ServiceException("Campo Local do Evento Obrigatorio!");
         }
         
         if (pedido.getEnderecoEvento().isEmpty()) {
-            throw new ServiceException("Campo Endereço é obrigatório!");
+            throw new ServiceException("Campo Endereco Obrigatorio!");
         }
         
         if (pedido.getTipoEvento().getDescricao().isEmpty()) {
-            throw new ServiceException("Campo Tipo é obrigatório!");
+            throw new ServiceException("Campo Tipo Obrigatorio!");
         }
 
         try {
@@ -87,12 +87,7 @@ public class PedidoService {
     public List<Pedido> buscarTodos() {
           return (List<Pedido>) pedidoDAO.buscarTodosPedidos();
     }
-    
-//    public static List<Cliente> buscarClientes(){
-//        ClienteDAO cliDAO = new ClienteDAO();
-//        return cliDAO.buscarCliente();
-//    }
-    
+        
     public static List<Produto> buscarProdutos(){
         ProdutoDAO pdao = new ProdutoDAO();
         return pdao.buscaProduto();

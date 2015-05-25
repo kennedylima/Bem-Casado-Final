@@ -1,7 +1,7 @@
 
 package br.com.larimaia.controller;
 
-import br.com.larimaia.DAO.ItemPedido_PedidoDAO;
+import br.com.larimaia.DAO.ItemPedidoPedidoDAO;
 
 
 public class ItemPedidoPedidoController {
@@ -10,7 +10,8 @@ public class ItemPedidoPedidoController {
     }
     
     
-    public void salvarItemPedido_pedido(){
-        ItemPedido_PedidoDAO ippdao = new ItemPedido_PedidoDAO();
+    public void salvarItemPedido_pedido(int idPedido, int idItem){
+        ItemPedidoPedidoDAO ippdao = new ItemPedidoPedidoDAO();
+        ippdao.salvarItemPedidoPedido(idPedido, idItem);
     }
 }

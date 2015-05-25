@@ -131,32 +131,26 @@ public class PedidoController extends HttpServlet{
 				//instacia de ItemPedidoPedido para salvar o ItemPedidoPedido no banco
 				ItemPedidoPedido ipp = new ItemPedidoPedido(); 
 				
-				//instacia de ItemPedidoPedidoService para salvar o ItemPedido
-				ItemPedidoPedidoService  ipps = new ItemPedidoPedidoService();
+				// obtendo o id do pedido recem criado
+				int idPedidoCadastrado = pedidoService.buscarIDPedidoCadastrado();
 				
+				// estrutura de repetição para salvar cada item pedido no banco de dados
 				for(ItemPedido ip: itemPedido){
 					try {
 						//ItemPedidoService ips envia ItemPedido ao ItemPedidoDAO para salvar no Banco
 						ips.salvarItemPedido(ip);
+						ItemPedidoPedidoService  ipps = new ItemPedidoPedidoService();
+						//System.out.println("id pedido cadastrado = "+idPedidoCadastrado);
 						
+						//instacia de ItemPedidoPedidoService para salvar o ItemPedido
 						int idItemPedidoCadastrado = ips.buscarIDItemPedidoCadastrado();
-						int idPedidoCadastrado = pedidoService.buscarIDPedidoCadastrado();
-						
-						System.out.println("id item pedido cadastrado = "+idItemPedidoCadastrado);
-						System.out.println("id pedido cadastrado = "+idPedidoCadastrado);
-						
-//						ipp.setIdPedido(idPedidoCadastrado);
-//						ipp.setIdItemPedido(idItemPedidoCadastrado);
-//						
-//						ipps.salvarItemPedidoPedido(ipp);
-						
+						//System.out.println("id item pedido cadastrado = "+idItemPedidoCadastrado);
+						ipps.salvarItemPedidoPedido(idPedidoCadastrado, idItemPedidoCadastrado);
 						
 					} catch (ServiceException e) {
 						e.printStackTrace();
 					}
 				}
-				
-				
 				
 				JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
 				
@@ -164,17 +158,16 @@ public class PedidoController extends HttpServlet{
 				JOptionPane.showMessageDialog(null, e);
 				e.printStackTrace();
 			}
-//			
 			
 		}
 		
 		else if(req.getParameter("adicionar")!=null){
-			System.out.println("Get Adicionar");
-			System.out.println(req.getParameter("produto"));
+			//System.out.println("Get Adicionar");
+			//System.out.println(req.getParameter("produto"));
 			ItemPedido ip = new ItemPedido();
 			
 			ip.setQuantidade(Integer.parseInt(req.getParameter("quantidade")));
-			System.out.println("QTD: "+ ip.getQuantidade());
+			//System.out.println("QTD: "+ ip.getQuantidade());
 			
 			PedidoService ps = new PedidoService();
 			List<Produto> prod = ps.buscarProdutos();
@@ -191,11 +184,11 @@ public class PedidoController extends HttpServlet{
 			}
 			
 			ip.setValor(ip.getProduto().getValor()*ip.getQuantidade());
-			System.out.println("Valor: "+ ip.getValor());
+			//System.out.println("Valor: "+ ip.getValor());
 			
 			valorTotal= valorTotal+ip.getValor();
 			
-			System.out.println(ip.getPedido() +" - "+ ip.getProduto().getDescricao() +" - "+ ip.getQuantidade() +" - "+ ip.getValor());
+			//System.out.println(ip.getPedido() +" - "+ ip.getProduto().getDescricao() +" - "+ ip.getQuantidade() +" - "+ ip.getValor());
 			
 			
 			itemPedido.add(ip);
@@ -206,30 +199,6 @@ public class PedidoController extends HttpServlet{
 			
 			
 		}
-		
-		
-//		Integer id;
-//	    String origemPedido = req.getParameter("origemPedido");
-//	    String dataPedido = req.getParameter("dataPedido");
-//	    Cliente cliente = (Cliente) req.getAttribute("cliente");
-//	    String cerimonial = req.getParameter("cerimonial");
-//	    String dataEvento = req.getParameter("dataEvento");
-//	    TipoEvento tipoEvento = (TipoEvento) req.getAttribute("tipoEvento");
-//	    String horaEvento = req.getParameter("horaEvento");
-//	    String indicacao = req.getParameter("indicacao");
-//	    String localEvento = req.getParameter("localEvento");
-//	    String enderecoEvento = req.getParameter("enderecoEvento");
-//	    String obs = req.getParameter("obs");
-//	    
-//	    
-//	    
-//		PedidoService ps = new PedidoService();
-//		try {
-//			ps.salvar(ped);
-//		} catch (ServiceException e) {
-//			e.printStackTrace();
-//		}
-		
 		
 	}
 	

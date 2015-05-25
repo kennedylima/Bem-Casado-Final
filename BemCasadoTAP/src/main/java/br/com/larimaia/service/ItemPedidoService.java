@@ -17,15 +17,15 @@ public class ItemPedidoService {
     public void salvarItemPedido(ItemPedido ip) throws ServiceException {
 
         if (ip.getProduto().getId() == null) {
-            throw new ServiceException("Campo Produto é obrigatório!");
+            throw new ServiceException("Campo Produto Obrigatorio!");
         }
 
         if (ip.getQuantidade()== null) {
-            throw new ServiceException("Campo Quantidade é obrigatório");
+            throw new ServiceException("Campo Quantidade Obrigatorio");
         }
         
         if (ip.getValor()== null) {
-            throw new ServiceException("Campo Valor está vazio!");
+            throw new ServiceException("Campo Valor esta vazio!");
         }
                  
          try {
@@ -40,11 +40,11 @@ public class ItemPedidoService {
     public void itemPedidoPedido(int idPedido,int idItemPedido) throws ServiceException{
         
         if(idPedido < 0){
-            throw new ServiceException("idPedido não corresponde");
+            throw new ServiceException("idPedido nao corresponde");
         }
         
         if (idItemPedido <0){
-            throw new ServiceException("idItemPedido não corresponde");
+            throw new ServiceException("idItemPedido nao corresponde");
         }
     }
 

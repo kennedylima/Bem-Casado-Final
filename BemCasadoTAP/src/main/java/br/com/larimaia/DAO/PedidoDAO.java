@@ -127,7 +127,6 @@ public class PedidoDAO {
     }
 
     private void cadastrar(Pedido pedido) throws ParseException {
-        // falta cadastrar a lista de itens de produto
         String sql;
         sql = "INSERT INTO Pedido(origemPedido,dataPedido,idcliente,"
                 + "cerimonial,dataEvento,idtipoEvento,horaEvento,"
@@ -136,11 +135,6 @@ public class PedidoDAO {
 
         try {
             PreparedStatement preparadorSQL = conexao.prepareStatement(sql);
-            
-//            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//            java.sql.Date dataPedido = new java.sql.Date(format.parse(pedido.getDataPedido()).getTime());
-//            
-//            java.sql.Date dataEvento = new java.sql.Date(format.parse(pedido.getDataEvento()).getTime());
             
             preparadorSQL.setString(1, pedido.getOrigemPedido());
             preparadorSQL.setDate(2, pedido.getDataPedido());// dataPedido);
@@ -155,7 +149,6 @@ public class PedidoDAO {
             preparadorSQL.setString(11, pedido.getObs());
             
             ItemPedidoController ip = new ItemPedidoController();
-           // ip.salvar((ItemPedido) pedido.getItens());
             preparadorSQL.execute();
             preparadorSQL.close();
 
@@ -253,3 +246,12 @@ public class PedidoDAO {
     
 
 }
+
+//ip.salvar((ItemPedido) pedido.getItens());
+
+
+
+//SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//java.sql.Date dataPedido = new java.sql.Date(format.parse(pedido.getDataPedido()).getTime());
+//
+//java.sql.Date dataEvento = new java.sql.Date(format.parse(pedido.getDataEvento()).getTime());

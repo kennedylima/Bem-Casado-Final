@@ -6,9 +6,9 @@ import br.com.larimaia.model.ItemPedidoPedido;
 
 public class ItemPedidoPedidoService {
 
-	public void salvarItemPedidoPedido(ItemPedidoPedido itemPedidoPedido) {
+	public void salvarItemPedidoPedido(int idPedido, int idItem) {
 		ItemPedidoPedidoDAO ippDAO = new ItemPedidoPedidoDAO();
-		ippDAO.salvarItemPedidoPedido(itemPedidoPedido);
+		ippDAO.salvarItemPedidoPedido(idPedido, idItem);
 		
 	}
 

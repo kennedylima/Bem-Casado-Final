@@ -18,7 +18,7 @@ public class ItemPedidoPedidoDAO  {
 		conexao = ConexaoUtil.getConnection();
 	}
 
-	public void salvarItemPedidoPedido(ItemPedidoPedido ipp) {
+	public void salvarItemPedidoPedido(int idPedido, int idItem) {
 		
         String sql;
         sql = "INSERT INTO itempedido_pedido(idpedido,iditempedido)"
@@ -27,8 +27,8 @@ public class ItemPedidoPedidoDAO  {
         try {
             PreparedStatement preparadorSQL = conexao.prepareStatement(sql);
             
-            preparadorSQL.setInt(1, ipp.getIdItemPedido());
-            preparadorSQL.setInt(2, ipp.getIdItemPedido());
+            preparadorSQL.setInt(1, idPedido);
+            preparadorSQL.setInt(2, idItem);
 
             preparadorSQL.execute();
             preparadorSQL.close();

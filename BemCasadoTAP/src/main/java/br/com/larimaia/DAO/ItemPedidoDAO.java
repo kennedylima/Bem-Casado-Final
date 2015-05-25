@@ -17,7 +17,7 @@ import br.com.larimaia.util.ConexaoUtil;
 public class ItemPedidoDAO {
     
     Connection conexao;
-    
+    int id =0;
     public ItemPedidoDAO(){
         conexao= ConexaoUtil.getConnection();
     }
@@ -39,7 +39,7 @@ public class ItemPedidoDAO {
     }
     
      private void cadastrar(ItemPedido item) {
-        String sql = "INSERT INTO ItemPedido (idproduto,quantidade,valor) VALUES (?,?,?)";
+        String sql = "INSERT INTO ItemPedido (idproduto,quatidade,valor) VALUES (?,?,?)";
         
         try {
             PreparedStatement preparadorSQL = conexao.prepareStatement(sql);
@@ -114,14 +114,15 @@ public class ItemPedidoDAO {
 
 
 	public int buscarItemPedidoCadastrado() {
-		String sql = "SELECT max(iditempedido) from itempedido;";
-	     int id =0;
+		String sql = "SELECT max(iditempedido) as iditempedido from itempedido;";
+	     
 	        try {
 	            PreparedStatement preparadorSQL = conexao.prepareStatement(sql);
 	            ResultSet resultado = preparadorSQL.executeQuery();
 	            while(resultado.next()){
-	            	System.out.println("entrei");
+	            	
 	            	id = resultado.getInt("iditempedido");
+	            	System.out.println("entrei =" +id);
 	            }
 	            preparadorSQL.close();
 	            
@@ -129,7 +130,8 @@ public class ItemPedidoDAO {
 	        } catch (SQLException ex) {
 	            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
 	        }   
-	        System.out.println("id buscado do item Pedido = "+id);
+	        
+	       // System.out.println("id buscado do item Pedido = "+id);
 	        return id;
 	}
 
