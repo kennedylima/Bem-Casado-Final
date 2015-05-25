@@ -142,7 +142,6 @@ public class PedidoDAO {
 //            
 //            java.sql.Date dataEvento = new java.sql.Date(format.parse(pedido.getDataEvento()).getTime());
             
-            System.out.println("data evento = "+pedido.getDataPedido());
             preparadorSQL.setString(1, pedido.getOrigemPedido());
             preparadorSQL.setDate(2, pedido.getDataPedido());// dataPedido);
             preparadorSQL.setInt(3,pedido.getCliente().getId());

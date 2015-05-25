@@ -47,7 +47,7 @@ public class ItemPedidoDAO {
              preparadorSQL.setInt(2, item.getQuantidade());
              preparadorSQL.setDouble(3, (item.getValor()));
              
-            preparadorSQL.executeQuery();
+            preparadorSQL.execute();
             preparadorSQL.close();
             
         } catch (SQLException ex) {
@@ -117,9 +117,9 @@ public class ItemPedidoDAO {
 		String sql = "SELECT max(iditempedido) as iditempedidocadastrado from itempedido;";
 	     int id =0;
 	        try {
-	        	System.out.println("A");
 	            PreparedStatement preparadorSQL = conexao.prepareStatement(sql);
 	            ResultSet resultado = preparadorSQL.executeQuery();
+	            System.out.println("B");
 	            while(resultado.next()){
 	            id = resultado.getInt("idpedido");
 	            }
