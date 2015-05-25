@@ -107,6 +107,11 @@ public class PedidoService {
          return pedidoDAO.setarIdDoPedidoCadastrado();
     }
 
+	public int buscarIDPedidoCadastrado() {
+		PedidoDAO pedidoDAO =new PedidoDAO();
+		return pedidoDAO.buscarIDPedidoCadastrado();
+	}
+
     
     
 }

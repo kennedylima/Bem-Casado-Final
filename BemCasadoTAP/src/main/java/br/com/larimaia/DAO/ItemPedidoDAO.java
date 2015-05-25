@@ -109,24 +109,32 @@ public class ItemPedidoDAO {
         }
     }
     
-    public int buscarIdItemPempedido() {
-     String sql = "SELECT max(iditempedido) as iditempedido from itempedido;";
-     int id =0;
-        try {
-            PreparedStatement preparadorSQL = conexao.prepareStatement(sql);
-            ResultSet resultado = preparadorSQL.executeQuery();
-            while(resultado.next()){
-            id = resultado.getInt("idpedido");
-            }
-            preparadorSQL.close();
-            
 
-        } catch (SQLException ex) {
-            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }   
-        System.out.println("id = "+id);
-        return id;
-    }
+
+
+
+	public int buscarItemPedidoCadastrado() {
+		String sql = "SELECT max(iditempedido) as iditempedidocadastrado from itempedido;";
+	     int id =0;
+	        try {
+	        	System.out.println("A");
+	            PreparedStatement preparadorSQL = conexao.prepareStatement(sql);
+	            ResultSet resultado = preparadorSQL.executeQuery();
+	            while(resultado.next()){
+	            id = resultado.getInt("idpedido");
+	            }
+	            preparadorSQL.close();
+	            
+
+	        } catch (SQLException ex) {
+	            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+	        }   
+	        System.out.println("id = "+id);
+	        return id;
+	}
+
+
+
     
 
     

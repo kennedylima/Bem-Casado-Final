@@ -232,6 +232,25 @@ public class PedidoDAO {
         return id;
     }
 
+	public int buscarIDPedidoCadastrado() {
+		String sql = "SELECT max(idpedido) as idpedido from pedido;";
+	     int id =0;
+	        try {
+	            PreparedStatement preparadorSQL = conexao.prepareStatement(sql);
+	            ResultSet resultado = preparadorSQL.executeQuery();
+	            while(resultado.next()){
+	            id = resultado.getInt("idpedido");
+	            }
+	            preparadorSQL.close();
+	            
+
+	        } catch (SQLException ex) {
+	            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+	        }   
+	        System.out.println("id = "+id);
+	        return id;
+	}
+
     
 
 }

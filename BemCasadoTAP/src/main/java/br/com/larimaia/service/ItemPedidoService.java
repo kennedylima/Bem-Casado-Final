@@ -1,6 +1,8 @@
 
 package br.com.larimaia.service;
 
+import java.text.ParseException;
+
 import br.com.larimaia.DAO.ItemPedidoDAO;
 import br.com.larimaia.exception.ServiceException;
 import br.com.larimaia.model.ItemPedido;
@@ -12,7 +14,7 @@ public class ItemPedidoService {
         itempedidoDAO = new ItemPedidoDAO();
     }
 
-    public void salvar(ItemPedido ip) throws ServiceException {
+    public void salvarItemPedido(ItemPedido ip) throws ServiceException {
 
         if (ip.getProduto().getId() == null) {
             throw new ServiceException("Campo Produto é obrigatório!");
@@ -25,11 +27,13 @@ public class ItemPedidoService {
         if (ip.getValor()== null) {
             throw new ServiceException("Campo Valor está vazio!");
         }
-        if(ip.getId()== null){
-            throw new ServiceException(ip.getId()+"Não é um pedido valido");
-        }
-         
-         itempedidoDAO.salvarListaDeItensPedido(ip);
+                 
+         try {
+			itempedidoDAO.salvar(ip);
+		} catch (ParseException e) {
+			
+			e.printStackTrace();
+		};
         
     }
     
@@ -43,6 +47,11 @@ public class ItemPedidoService {
             throw new ServiceException("idItemPedido não corresponde");
         }
     }
+
+	public int buscarIDItemPedidoCadastrado() {
+		ItemPedidoDAO itemPedidoDAO = new ItemPedidoDAO();
+		return itemPedidoDAO.buscarItemPedidoCadastrado();
+	}
     
     
     

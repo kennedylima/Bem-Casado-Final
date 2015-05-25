@@ -18,10 +18,13 @@ import javax.swing.JOptionPane;
 import br.com.larimaia.exception.ServiceException;
 import br.com.larimaia.model.Cliente;
 import br.com.larimaia.model.ItemPedido;
+import br.com.larimaia.model.ItemPedidoPedido;
 import br.com.larimaia.model.Pedido;
 import br.com.larimaia.model.Produto;
 import br.com.larimaia.model.TipoEvento;
 import br.com.larimaia.service.ClienteService;
+import br.com.larimaia.service.ItemPedidoPedidoService;
+import br.com.larimaia.service.ItemPedidoService;
 import br.com.larimaia.service.PedidoService;
 
 
@@ -59,11 +62,18 @@ public class PedidoController extends HttpServlet{
 			Pedido ped = new Pedido();
 		    ped.setOrigemPedido(req.getParameter("origemProduto"));
 		    
+		    //classe que converte para um formato de data
 		    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		    
+		    //classe que vai recebera data convertida para salvar na classe Pedido
 		    Date dataPedido;
 			try {
+				//dataPedido recebe a data em formato String pedindo como parametro da tela(Pedido.jsp)
 				dataPedido = new Date(format.parse(req.getParameter("dataPedido")).getTime());
+				
+				//pedido seta a data do pedido ja convertido
 				ped.setDataPedido(dataPedido);
+				
 			} catch (ParseException e1) {
 				System.out.println("data pedido preenchida de forma errada");
 				e1.printStackTrace();
@@ -79,12 +89,17 @@ public class PedidoController extends HttpServlet{
 		    //setando o cliente dentro do pedido
 		    ped.setCliente(cliente);
 		    
+		    //pedido seta o Cerimonial pedindo para a telaem formato String
 		    ped.setCerimonial(req.getParameter("cerimonial"));
 		    
+		    //dataEvento classe que será setada na classe Pedido
 		    Date dataEvento;
 			try {
+				//dataEvento recebe a data ja convertida, que é pedida a tela com o requeste(req) com parametro String
 				dataEvento = new Date(format.parse(req.getParameter("dataEvento")).getTime());
+				//pedido ped seta dataEvento 
 				ped.setDataEvento(dataEvento);
+				
 			} catch (ParseException e1) {
 					System.out.println("Data evento preenchida de forma errada");
 				e1.printStackTrace();
@@ -93,7 +108,6 @@ public class PedidoController extends HttpServlet{
 		    //inteiro te(tipo evento) recebe o id do tipo evento escolhido no combobox
 		    int te = Integer.parseInt(req.getParameter("tipoEvento"));
 		    
-		    System.out.println("te valor ="+te);
 		    //setando o tipo do evento buscado por id no banco 
 			TipoEvento tipoEvento = TipoEventoService.BuscarTipoEventoPorId(te);
 			
@@ -104,12 +118,46 @@ public class PedidoController extends HttpServlet{
 		    ped.setEnderecoEvento(req.getParameter("enderecoEvento"));
 		    ped.setObs(req.getParameter("obs"));
 		    
-		    System.out.println("data evento = "+req.getParameter("dataEvento"));
-		    System.out.println("data pedido= "+req.getParameter("dataPedido"));
-		    pedidoService = new PedidoService();
+		    //instaciado o pedidoService,classe criada como parametro no inicio dessa classe(PedidoController)
+		     pedidoService = new PedidoService();
 		    
 		    try {
+		    	//pedidoService salva o pedido
 				pedidoService.salvar(ped);
+				
+				//instacia de ItemPedidoService para salvar o ItemPedido
+				ItemPedidoService ips = new ItemPedidoService();
+				
+				//instacia de ItemPedidoPedido para salvar o ItemPedidoPedido no banco
+				ItemPedidoPedido ipp = new ItemPedidoPedido(); 
+				
+				//instacia de ItemPedidoPedidoService para salvar o ItemPedido
+				ItemPedidoPedidoService  ipps = new ItemPedidoPedidoService();
+				
+				for(ItemPedido ip: itemPedido){
+					try {
+						//ItemPedidoService ips envia ItemPedido ao ItemPedidoDAO para salvar no Banco
+						ips.salvarItemPedido(ip);
+						
+						int idItemPedidoCadastrado = ips.buscarIDItemPedidoCadastrado();
+						int idPedidoCadastrado = pedidoService.buscarIDPedidoCadastrado();
+						
+						System.out.println("id item pedido cadastrado = "+idItemPedidoCadastrado);
+						System.out.println("id pedido cadastrado = "+idPedidoCadastrado);
+						
+//						ipp.setIdPedido(idPedidoCadastrado);
+//						ipp.setIdItemPedido(idItemPedidoCadastrado);
+//						
+//						ipps.salvarItemPedidoPedido(ipp);
+						
+						
+					} catch (ServiceException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				
+				
 				JOptionPane.showMessageDialog(null, "Cadastradocom Sucesso!");
 				
 			} catch (ServiceException e) {

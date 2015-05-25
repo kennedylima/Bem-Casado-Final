@@ -16,7 +16,7 @@ public class ItemPedidoController {
         ItemPedidoService ipservice = new ItemPedidoService();
        
         try {
-            ipservice.salvar(ip);
+            ipservice.salvarItemPedido(ip);
         } catch (ServiceException ex) {
             Logger.getLogger(ItemPedidoController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -36,7 +36,7 @@ public class ItemPedidoController {
     
     public int consultarIdItemPedido(){
         ItemPedidoDAO ipDAO = new ItemPedidoDAO();
-        return ipDAO.buscarIdItemPempedido();
+        return ipDAO.buscarItemPedidoCadastrado();
     }
     
 }

@@ -1,5 +1,8 @@
 package br.com.larimaia.model;
 
+import br.com.larimaia.DAO.ItemPedidoDAO;
+import br.com.larimaia.DAO.ItemPedido_PedidoDAO;
+
 
 public class ItemPedido {
     private Integer id;
@@ -47,5 +50,7 @@ public class ItemPedido {
     public void setPedido(int idpedido) {
         this.idPedido = idpedido;
     }
+
+	
 
 }
