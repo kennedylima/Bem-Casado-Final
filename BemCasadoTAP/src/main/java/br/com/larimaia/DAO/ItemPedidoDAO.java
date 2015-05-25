@@ -39,7 +39,7 @@ public class ItemPedidoDAO {
     }
     
      private void cadastrar(ItemPedido item) {
-        String sql = "INSERT INTO ItemPedido (idproduto,quantidade,valor) VALUES (?,?,?)";
+        String sql = "INSERT INTO ItemPedido (idproduto,quatidade,valor) VALUES (?,?,?)";
         
         try {
             PreparedStatement preparadorSQL = conexao.prepareStatement(sql);
